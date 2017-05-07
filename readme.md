@@ -7,9 +7,10 @@ Steps to set it up
 - Clone this repository from [https://github.com/vasyanchik/basiclaravel](https://github.com/vasyanchik/basiclaravel).
 - Create two databases: one for main project and one for testing.
 - Copy .env.example into .env and .env.testing. Configure them with database access data that you have.
+- Run `composer install` to install dependencies
 - Run `php artisan key:generate` to generate key
 - Run `php artisan migrate` to migrate database structure
-- Run `php artisan db:seed` to add some sample data into database;
+- Run `php artisan db:seed` to add some sample data into database
 - Open project in browser
 
 
