@@ -12,6 +12,7 @@ Steps to set it up
 - Run `php artisan migrate` to migrate database structure
 - Run `php artisan db:seed` to add some sample data into database
 - Open project in browser
+- Run `phpunit` for tests
 
 
 ## API ENDPOINTS
