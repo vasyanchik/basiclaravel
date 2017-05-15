@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class Product extends Model
 {
@@ -52,10 +53,25 @@ class Product extends Model
 
     static public function getProducts($sortBy, $order)
     {
-        if($sortBy == 'name'){
-            return self::orderBy('name', $order)->available()->get();
-        }else{
-            return self::orderBy('name', $order)->available()->get();
+        switch($sortBy){
+            case 'price':
+                return self::getProductsByPrice($order);
+            default:
+                return self::orderBy($sortBy, $order)->available()->get()->toArray();
         }
+    }
+
+    static public function getProductsByPrice($order)
+    {
+        $rawResults = DB::table('products')
+                        ->select(DB::raw('products.*, products.price - (products.price * (least('.self::MAX_DISCOUNT.', ifnull((select sum(d.discount) from vouchers v, discounts d, product_voucher pv where pv.product_id=products.id and pv.voucher_id=v.id and d.id=v.discount_id and v.available=1 and v.start_date<=now() and v.end_date>=now()), 0)) / 100)) price'))
+                        ->where('available', 1)
+                        ->orderBy('price', $order)
+                        ->get();
+        $results = [];
+        foreach($rawResults as $item){
+            $results[] = (array)$item;
+        }
+        return $results;
     }
 }

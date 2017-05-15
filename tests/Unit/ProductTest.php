@@ -62,18 +62,49 @@ class ProductTest extends TestCase
         $this->assertEquals(100.00, $product->price);
     }
 
-    public function testGetProductsAsc()
+    public function testGetProductsNameAsc()
     {
         $products = Product::getProducts('name', 'asc');
-        $this->assertEquals('test product #1', $products[0]->name);
-        $this->assertEquals('test product #2', $products[1]->name);
+        $this->assertEquals('test product #1', $products[0]['name']);
+        $this->assertEquals('test product #2', $products[1]['name']);
     }
 
-    public function testGetProductsDesc()
+    public function testGetProductsNameDesc()
     {
         $products = Product::getProducts('name', 'desc');
-        $this->assertEquals('test product #2', $products[0]->name);
-        $this->assertEquals('test product #1', $products[1]->name);
+        $this->assertEquals('test product #2', $products[0]['name']);
+        $this->assertEquals('test product #1', $products[1]['name']);
+    }
+
+    public function testGetProductsPriceAsc()
+    {
+        $product = Product::find(1);
+        $product->vouchers()->attach(1); // 1 - 10% discount
+
+        $product = Product::find(2);
+        $product->vouchers()->attach(3); // 3 - 20% discount
+        $product->vouchers()->attach(4); // 4 - 25% discount
+        $product->vouchers()->attach(5); // 5 - 25% discount
+
+        $products = Product::getProducts('price', 'asc');
+
+        $this->assertEquals('test product #2', $products[0]['name']);
+        $this->assertEquals('test product #1', $products[1]['name']);
+    }
+
+    public function testGetProductsPriceDesc()
+    {
+        $product = Product::find(1);
+        $product->vouchers()->attach(1); // 1 - 10% discount
+
+        $product = Product::find(2);
+        $product->vouchers()->attach(3); // 3 - 20% discount
+        $product->vouchers()->attach(4); // 4 - 25% discount
+        $product->vouchers()->attach(5); // 5 - 25% discount
+
+        $products = Product::getProducts('price', 'desc');
+        $this->assertEquals('test product #1', $products[0]['name']);
+        $this->assertEquals('test product #2', $products[1]['name']);
     }
 
     public function testGetProductsNotAvailable()

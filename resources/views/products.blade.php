@@ -7,7 +7,7 @@
     @foreach($products as $product)
     <tr>
         <td>{{$product['name']}}</td>
-        <td>{{$product['price']}}</td>
+        <td>{{number_format($product['price'], 2)}}</td>
         <td><button type="button" class="btn btn-success" onclick="buyProduct('{{$product['id']}}', '{{$product['name']}}')">Buy</button></td>
     </tr>
     @endforeach

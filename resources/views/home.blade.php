@@ -104,7 +104,7 @@
 						newOrder = 'desc';
                     }
 				}
-                document.getElementById('productList').setAttribute('data-order', sortBy);
+                document.getElementById('productList').setAttribute('data-sort-by', sortBy);
                 document.getElementById('productList').setAttribute('data-order', newOrder);
                 loadProducts();
 			}

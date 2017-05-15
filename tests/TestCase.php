@@ -21,6 +21,7 @@ abstract class TestCase extends BaseTestCase
         Voucher::insert(['discount_id' => 2, 'start_date' => '2017-01-01', 'end_date' => '2017-12-12' ]);
         Voucher::insert(['discount_id' => 3, 'start_date' => '2017-01-01', 'end_date' => '2017-12-12' ]);
         Voucher::insert(['discount_id' => 4, 'start_date' => '2017-01-01', 'end_date' => '2017-12-12' ]);
+        Voucher::insert(['discount_id' => 4, 'start_date' => '2017-01-01', 'end_date' => '2017-12-12' ]);
 
         Product::insert(['name' => 'test product #1', 'price' => 100]);
         Product::insert(['name' => 'test product #2', 'price' => 200]);

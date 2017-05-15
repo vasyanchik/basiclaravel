@@ -39,6 +39,6 @@ class ProductController extends Controller
 
     public function index($sortBy, $order)
     {
-        return view('products', ['products' => Product::getProducts($sortBy, $order)->toArray()]);
+        return view('products', ['products' => Product::getProducts($sortBy, $order)]);
     }
 }

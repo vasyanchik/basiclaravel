@@ -53,7 +53,7 @@ class ProductTest extends TestCase
     {
         $response = $this->json('get', '/api/products/name/asc');
 
-        $products = Product::getProducts('name', 'asc')->toArray();
+        $products = Product::getProducts('name', 'asc');
         $response->assertViewHas('products', $products);
     }
 }
